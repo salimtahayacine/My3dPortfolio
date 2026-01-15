@@ -11,7 +11,9 @@ This project aims to create a professional portfolio website that combines tradi
 - **`/conception_generale.md`** - General conception and objectives
 - **`/conception_tasks_v0.md`** - Detailed task breakdown by phase
 - **`/tasks.md`** - Task tracker with checkboxes for progress monitoring
-- **`/dev-portfolio/`** - Angular application source code
+- **`/src/`** - Angular application source code
+- **`/public/`** - Public assets (favicon, etc.)
+- **Configuration files** - Angular, TypeScript, and package configurations at root level
 
 ## 🚀 Current Status
 
@@ -49,14 +51,11 @@ Phase 1 has been successfully completed! The Angular project is now set up with:
 For detailed information about each phase:
 - See `conception_tasks_v0.md` for complete phase breakdown
 - See `tasks.md` for current progress and checklist
-- See `dev-portfolio/README.md` for development instructions
+- See `dev-portfolio-README.md` for development instructions and architecture details
 
 ## 🏃 Quick Start
 
 ```bash
-# Navigate to the project directory
-cd dev-portfolio
-
 # Install dependencies
 npm install
 
