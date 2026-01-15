@@ -1,0 +1,24 @@
+.section-title {
+  margin-bottom: var(--spacing-xl);
+  
+  &[data-align="left"] {
+    text-align: left;
+  }
+  
+  &[data-align="center"] {
+    text-align: center;
+  }
+  
+  &[data-align="right"] {
+    text-align: right;
+  }
+  
+  .title {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+  }
+}

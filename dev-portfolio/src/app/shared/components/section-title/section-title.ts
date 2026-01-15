@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-section-title',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './section-title.scss',
 })
 export class SectionTitle {
-
+  title = input<string>('');
+  subtitle = input<string>('');
+  align = input<'left' | 'center' | 'right'>('center');
 }

@@ -1,1 +1,6 @@
-<p>section-title works!</p>
+<div class="section-title" [attr.data-align]="align()">
+  <h2 class="title">{{ title() }}</h2>
+  @if (subtitle()) {
+    <p class="subtitle">{{ subtitle() }}</p>
+  }
+</div>
