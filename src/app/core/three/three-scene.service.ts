@@ -297,55 +297,43 @@ export class ThreeSceneService implements OnDestroy {
       case 'hero':
         this.targetCameraPosition.set(0, 0, 5);
         this.targetCameraRotation.set(0, 0, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0x3b82f6); // Blue
-          this.lights.point.intensity = 1;
-        }
+        this.lights.point.color.setHex(0x3b82f6); // Blue
+        this.lights.point.intensity = 1;
         break;
 
       case 'about':
         this.targetCameraPosition.set(-2, 0, 5);
         this.targetCameraRotation.set(0, 0.3, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0x8b5cf6); // Purple
-          this.lights.point.intensity = 1.2;
-        }
+        this.lights.point.color.setHex(0x8b5cf6); // Purple
+        this.lights.point.intensity = 1.2;
         break;
 
       case 'experience':
         this.targetCameraPosition.set(2, 1, 5);
         this.targetCameraRotation.set(-0.2, -0.3, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0xec4899); // Pink
-          this.lights.point.intensity = 1.3;
-        }
+        this.lights.point.color.setHex(0xec4899); // Pink
+        this.lights.point.intensity = 1.3;
         break;
 
       case 'projects':
         this.targetCameraPosition.set(0, -1, 6);
         this.targetCameraRotation.set(0.15, 0, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0x10b981); // Green
-          this.lights.point.intensity = 1.5;
-        }
+        this.lights.point.color.setHex(0x10b981); // Green
+        this.lights.point.intensity = 1.5;
         break;
 
       case 'services':
         this.targetCameraPosition.set(-1, 1, 5);
         this.targetCameraRotation.set(-0.15, 0.2, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0xf59e0b); // Amber
-          this.lights.point.intensity = 1.4;
-        }
+        this.lights.point.color.setHex(0xf59e0b); // Amber
+        this.lights.point.intensity = 1.4;
         break;
 
       case 'contact':
         this.targetCameraPosition.set(0, 0, 4);
         this.targetCameraRotation.set(0, 0, 0);
-        if (this.lights.point) {
-          this.lights.point.color.setHex(0xef4444); // Red
-          this.lights.point.intensity = 1.6;
-        }
+        this.lights.point.color.setHex(0xef4444); // Red
+        this.lights.point.intensity = 1.6;
         break;
 
       default:

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, fromEvent } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, fromEvent, Subscription } from 'rxjs';
 import { throttleTime, map, distinctUntilChanged } from 'rxjs/operators';
 
 export interface ScrollState {
@@ -11,13 +11,14 @@ export interface ScrollState {
 @Injectable({
   providedIn: 'root'
 })
-export class ScrollService {
+export class ScrollService implements OnDestroy {
   private sections: string[] = ['hero', 'about', 'experience', 'projects', 'services', 'contact'];
   private scrollStateSubject = new BehaviorSubject<ScrollState>({
     currentSection: 'hero',
     scrollProgress: 0,
     sectionIndex: 0
   });
+  private scrollSubscription?: Subscription;
 
   public scrollState$: Observable<ScrollState> = this.scrollStateSubject.asObservable();
   public currentSection$: Observable<string> = this.scrollState$.pipe(
@@ -33,7 +34,7 @@ export class ScrollService {
    * Initialize scroll event listener to track current section
    */
   private initScrollListener(): void {
-    fromEvent(window, 'scroll')
+    this.scrollSubscription = fromEvent(window, 'scroll')
       .pipe(
         throttleTime(100, undefined, { leading: true, trailing: true })
       )
@@ -57,19 +58,22 @@ export class ScrollService {
     // Determine which section is currently in view
     let currentSection = 'hero';
     let sectionIndex = 0;
+    let minDistance = Infinity;
 
+    // Find the section closest to the viewport center
     for (let i = 0; i < this.sections.length; i++) {
       const element = document.getElementById(this.sections[i]);
       if (element) {
         const rect = element.getBoundingClientRect();
-        const elementTop = rect.top;
-        const elementHeight = rect.height;
+        const elementCenter = rect.top + rect.height / 2;
+        const viewportCenter = windowHeight / 2;
+        const distance = Math.abs(elementCenter - viewportCenter);
         
-        // Section is considered active if its top is in the upper half of the viewport
-        if (elementTop <= windowHeight / 2 && elementTop + elementHeight > windowHeight / 2) {
+        // Choose the section with center closest to viewport center
+        if (distance < minDistance) {
+          minDistance = distance;
           currentSection = this.sections[i];
           sectionIndex = i;
-          break;
         }
       }
     }
@@ -106,5 +110,14 @@ export class ScrollService {
    */
   getSections(): string[] {
     return [...this.sections];
+  }
+
+  /**
+   * Cleanup subscriptions
+   */
+  ngOnDestroy(): void {
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe();
+    }
   }
 }
