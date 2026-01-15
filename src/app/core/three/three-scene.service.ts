@@ -30,8 +30,10 @@ export class ThreeSceneService {
     this.camera.position.z = 5;
 
     // Create renderer
+    // Use antialias conditionally for better performance on lower-end devices
+    const useAntialias = window.devicePixelRatio <= 2;
     this.renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
+      antialias: useAntialias,
       alpha: true 
     });
     this.renderer.setSize(container.clientWidth, container.clientHeight);
@@ -245,7 +247,10 @@ export class ThreeSceneService {
       this.scene.traverse((object) => {
         if (object instanceof THREE.Mesh) {
           object.geometry.dispose();
-          if (object.material instanceof THREE.Material) {
+          // Handle both single material and array of materials
+          if (Array.isArray(object.material)) {
+            object.material.forEach((material) => material.dispose());
+          } else if (object.material instanceof THREE.Material) {
             object.material.dispose();
           }
         }
