@@ -1,0 +1,38 @@
+.tag {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  
+  &[data-size="sm"] {
+    padding: 2px var(--spacing-xs);
+    font-size: 0.75rem;
+  }
+  
+  &[data-variant="primary"] {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  &[data-variant="secondary"] {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  
+  &[data-variant="success"] {
+    background-color: var(--color-success);
+    color: white;
+  }
+  
+  &[data-variant="warning"] {
+    background-color: var(--color-warning);
+    color: white;
+  }
+  
+  &[data-variant="error"] {
+    background-color: var(--color-error);
+    color: white;
+  }
+}

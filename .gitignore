@@ -9,6 +9,8 @@
 
 # Node modules and dependency files
 /node_modules/
+node_modules/
+dev-portfolio/node_modules/
 /package-lock.json
 /yarn.lock
 
@@ -26,3 +28,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
