@@ -1,0 +1,41 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md) 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-brand a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  &-menu {
+    display: flex;
+    gap: var(--spacing-lg);
+
+    a {
+      color: var(--color-text);
+      font-weight: 500;
+      transition: color var(--transition-fast);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+[data-theme="dark"] .navbar {
+  background-color: rgba(17, 24, 39, 0.9);
+}
