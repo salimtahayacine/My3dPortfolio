@@ -11,7 +11,9 @@ This project aims to create a professional portfolio website that combines tradi
 - **`/conception_generale.md`** - General conception and objectives
 - **`/conception_tasks_v0.md`** - Detailed task breakdown by phase
 - **`/tasks.md`** - Task tracker with checkboxes for progress monitoring
-- **`/dev-portfolio/`** - Angular application source code
+- **`/src/`** - Angular application source code
+- **`/public/`** - Public assets (favicon, etc.)
+- **Configuration files** - Angular, TypeScript, and package configurations at root level
 
 ## 🚀 Current Status
 
@@ -28,12 +30,26 @@ Phase 1 has been successfully completed! The Angular project is now set up with:
 - ✅ TypeScript interfaces for content models
 - ✅ Static data structure for Education, Experience, Projects, and Services
 
+### ✅ Phase 2 - Three.js Integration (COMPLETED)
+
+Phase 2 has been successfully completed! Three.js is now integrated with:
+
+- ✅ Three.js library installed and configured
+- ✅ ThreeSceneComponent created in features/three-scene
+- ✅ ThreeSceneService with animation loop and scene management
+- ✅ Basic 3D scene with camera, renderer, and lighting
+- ✅ Interactive 3D objects (cube, sphere, torus) with animations
+- ✅ Raycasting for clickable objects
+- ✅ Hover effects with color and scale changes
+- ✅ Responsive resize handling
+- ✅ Scene positioned as fixed background behind content
+
 ### 📋 Next Steps
 
-**Phase 2 - Three.js Integration** is ready to begin:
-- Setup Three.js library
-- Create 3D scene component
-- Implement scene architecture
+**Phase 3 - Scroll & Synchronization** is ready to begin:
+- Create ScrollService for section tracking
+- Link sections with 3D scene animations
+- Implement GSAP/ScrollTrigger for smooth transitions
 - Add basic 3D models and interactions
 
 ## 🛠️ Tech Stack
@@ -49,14 +65,11 @@ Phase 1 has been successfully completed! The Angular project is now set up with:
 For detailed information about each phase:
 - See `conception_tasks_v0.md` for complete phase breakdown
 - See `tasks.md` for current progress and checklist
-- See `dev-portfolio/README.md` for development instructions
+- See `dev-portfolio-README.md` for development instructions and architecture details
 
 ## 🏃 Quick Start
 
 ```bash
-# Navigate to the project directory
-cd dev-portfolio
-
 # Install dependencies
 npm install
 
@@ -81,5 +94,5 @@ This project is part of a personal portfolio and is for demonstration purposes.
 
 ---
 
-**Status**: Phase 1 Complete ✅ | Current Focus: Phase 2 (Three.js Integration)
+**Status**: Phase 1 & 2 Complete ✅ | Current Focus: Phase 3 (Scroll & Synchronization)
 

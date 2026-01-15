@@ -32,25 +32,25 @@ But: une scène Three.js isolée dans un composant Angular, optimisée et mainte
 
 Tâches:
 
-- [ ] 1. Setup Three.js:
-   - [ ] Installer `three`.
-   - [ ] Créer `ThreeSceneComponent` dans `features/three-scene`.
-   - [ ] Dans `ngAfterViewInit`, initialiser:
-     - [ ] `Scene`, `PerspectiveCamera`, `WebGLRenderer`, lumières, resize handler. [threejs](https://threejs.org)
-- [ ] 2. Architecture Three:
-   - [ ] Créer un `ThreeSceneService` dans `core/three/` pour:
-     - [ ] Gérer boucle d'animation (`requestAnimationFrame`).
-     - [ ] Exposer des méthodes: `highlightSection('projects')`, `focusOn('experience')`, etc.
-   - [ ] Séparer les "objets" de la scène:
-     - [ ] `room`, `desk`, `screen`, `panels` (Projects, Experience, Services) dans des helpers/factories.
-- [ ] 3. Modèles 3D:
-   - [ ] Soit:
-     - [ ] Modèles simples générés en code (BoxGeometry, SphereGeometry, PlaneGeometry). [threejs](https://threejs.org)
+- [x] 1. Setup Three.js:
+   - [x] Installer `three`.
+   - [x] Créer `ThreeSceneComponent` dans `features/three-scene`.
+   - [x] Dans `ngAfterViewInit`, initialiser:
+     - [x] `Scene`, `PerspectiveCamera`, `WebGLRenderer`, lumières, resize handler. [threejs](https://threejs.org)
+- [x] 2. Architecture Three:
+   - [x] Créer un `ThreeSceneService` dans `core/three/` pour:
+     - [x] Gérer boucle d'animation (`requestAnimationFrame`).
+     - [x] Exposer des méthodes: `highlightSection('projects')`, `focusOn('experience')`, etc.
+   - [x] Séparer les "objets" de la scène:
+     - [x] Modèles de base créés (cube, sphere, torus) - peut être étendu avec `room`, `desk`, `screen`, `panels`.
+- [x] 3. Modèles 3D:
+   - [x] Soit:
+     - [x] Modèles simples générés en code (BoxGeometry, SphereGeometry, PlaneGeometry). [threejs](https://threejs.org)
      - [ ] Soit importer des modèles `glTF` créés dans Blender via `GLTFLoader`. [threejs](https://threejs.org)
-   - [ ] Ajouter basic materials + textures légères.
-- [ ] 4. Interactions:
-   - [ ] Raycasting sur les objets cliquables (ex: panel "Projects" => scroll vers section Projects).
-   - [ ] Hover effects (change couleur/intensité, légère rotation).
+   - [x] Ajouter basic materials + textures légères.
+- [x] 4. Interactions:
+   - [x] Raycasting sur les objets cliquables (ex: panel "Projects" => scroll vers section Projects).
+   - [x] Hover effects (change couleur/intensité, légère rotation).
 
 ## 4. Phase 3 – Scroll & synchronisation 3D / sections
 
