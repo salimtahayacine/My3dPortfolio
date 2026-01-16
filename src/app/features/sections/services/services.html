@@ -2,5 +2,59 @@
   <div class="container">
     <h2>Services</h2>
     <p>Professional services I offer to help bring your ideas to life.</p>
+    
+    <div class="services-grid">
+      @for (service of services; track service.id) {
+        <div class="service-card">
+          @if (service.icon) {
+            <div class="service-icon">
+              <i class="icon-{{ service.icon }}"></i>
+            </div>
+          }
+          
+          <h3>{{ service.title }}</h3>
+          <p class="service-description">{{ service.description }}</p>
+          
+          @if (service.features && service.features.length > 0) {
+            <div class="features">
+              <h4>Features:</h4>
+              <ul>
+                @for (feature of service.features; track feature) {
+                  <li>{{ feature }}</li>
+                }
+              </ul>
+            </div>
+          }
+          
+          @if (service.technologies && service.technologies.length > 0) {
+            <div class="technologies">
+              <h4>Technologies:</h4>
+              <div class="tech-tags">
+                @for (tech of service.technologies; track tech) {
+                  <span class="tech-tag">{{ tech }}</span>
+                }
+              </div>
+            </div>
+          }
+          
+          @if (service.deliverables && service.deliverables.length > 0) {
+            <div class="deliverables">
+              <h4>Deliverables:</h4>
+              <ul>
+                @for (deliverable of service.deliverables; track deliverable) {
+                  <li>{{ deliverable }}</li>
+                }
+              </ul>
+            </div>
+          }
+          
+          @if (service.estimatedDuration) {
+            <div class="duration">
+              <strong>Estimated Duration:</strong> {{ service.estimatedDuration }}
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 </section>

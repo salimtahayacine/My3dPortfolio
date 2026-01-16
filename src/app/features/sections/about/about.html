@@ -2,5 +2,37 @@
   <div class="container">
     <h2>About Me</h2>
     <p>Passionate Fullstack Developer specializing in Angular, Spring Boot, and React Native.</p>
+    
+    <div class="education-section">
+      <h3>Education</h3>
+      <div class="education-timeline">
+        @for (edu of education; track edu.id) {
+          <div class="education-card">
+            <div class="education-header">
+              <h4>{{ edu.degree }}</h4>
+              <span class="education-period">
+                {{ formatDate(edu.startDate) }} - {{ edu.current ? 'Present' : formatDate(edu.endDate) }}
+              </span>
+            </div>
+            <div class="education-details">
+              <p class="institution">{{ edu.institution }}</p>
+              @if (edu.location) {
+                <p class="location">{{ edu.location }}</p>
+              }
+              @if (edu.description) {
+                <p class="description">{{ edu.description }}</p>
+              }
+              @if (edu.achievements && edu.achievements.length > 0) {
+                <ul class="achievements">
+                  @for (achievement of edu.achievements; track achievement) {
+                    <li>{{ achievement }}</li>
+                  }
+                </ul>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
   </div>
 </section>
