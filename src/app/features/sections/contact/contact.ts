@@ -50,12 +50,12 @@ export class Contact implements AfterViewInit {
   }
 
   private validateForm(): boolean {
-    return !!(
-      this.formData.name.trim() &&
-      this.formData.email.trim() &&
-      this.formData.message.trim() &&
-      this.isValidEmail(this.formData.email)
-    );
+    const hasName = this.formData.name.trim().length > 0;
+    const hasEmail = this.formData.email.trim().length > 0;
+    const hasMessage = this.formData.message.trim().length > 0;
+    const isEmailValid = this.isValidEmail(this.formData.email);
+    
+    return hasName && hasEmail && hasMessage && isEmailValid;
   }
 
   private isValidEmail(email: string): boolean {
