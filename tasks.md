@@ -58,21 +58,21 @@ But: rendre l'expérience cohérente: le scroll contrôle les sections ET certai
 
 Tâches:
 
-- [ ] 1. Scroll manager:
-   - [ ] Créer un `ScrollService` dans `core/`:
-     - [ ] Observables: `currentSection`, `scrollProgress`.
-     - [ ] Méthodes: `scrollToSection('projects')`.
-- [ ] 2. Liaison sections ↔ 3D:
-   - [ ] Chaque section (about, experience, projects, services) s'abonne à `ScrollService` pour savoir si elle est active.
-   - [ ] `ThreeSceneService` s'abonne aussi:
-     - [ ] Quand `currentSection = 'projects'` => repositionner caméra, highlight panneaux projets, animer quelques éléments. [discourse.threejs](https://discourse.threejs.org/t/interactive-3d-portfolio-scroll-experience/46109)
-- [ ] 3. GSAP/ScrollTrigger (optionnel mais puissant):
-   - [ ] Attacher des timelines aux IDs des sections pour:
-     - [ ] Rotations douces de la scène.
-     - [ ] Changement de lumière/ambiance par section. [youtube](https://www.youtube.com/watch?v=rbIbvw6c53k)
-- [ ] 4. Responsive:
-   - [ ] Désactiver certains effets ou simplifier la scène sur mobile (moins d'objets, moins de particules).
-   - [ ] Réduire résolution du renderer sur mobile pour les performances.
+- [x] 1. Scroll manager:
+   - [x] Créer un `ScrollService` dans `core/`:
+     - [x] Observables: `currentSection`, `scrollProgress`.
+     - [x] Méthodes: `scrollToSection('projects')`.
+- [x] 2. Liaison sections ↔ 3D:
+   - [x] Chaque section (about, experience, projects, services) s'abonne à `ScrollService` pour savoir si elle est active.
+   - [x] `ThreeSceneService` s'abonne aussi:
+     - [x] Quand `currentSection = 'projects'` => repositionner caméra, highlight panneaux projets, animer quelques éléments. [discourse.threejs](https://discourse.threejs.org/t/interactive-3d-portfolio-scroll-experience/46109)
+- [x] 3. GSAP/ScrollTrigger (optionnel mais puissant):
+   - [x] Attacher des timelines aux IDs des sections pour:
+     - [x] Rotations douces de la scène.
+     - [x] Changement de lumière/ambiance par section. [youtube](https://www.youtube.com/watch?v=rbIbvw6c53k)
+- [x] 4. Responsive:
+   - [x] Désactiver certains effets ou simplifier la scène sur mobile (moins d'objets, moins de particules).
+   - [x] Réduire résolution du renderer sur mobile pour les performances.
 
 ## 5. Phase 4 – Contenu: Education, Experience, Projects, Services
 
