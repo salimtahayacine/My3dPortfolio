@@ -6,6 +6,12 @@ section {
 
   h2 {
     margin-bottom: var(--spacing-lg);
+    color: white;
+    font-size: 2.5rem;
+  }
+
+  p {
+    color: white;
   }
 
   .projects-grid {
@@ -44,11 +50,13 @@ section {
 
       h3 {
         margin: 0 0 var(--spacing-md) 0;
+        color: white;
       }
 
       .project-description {
         margin-bottom: var(--spacing-md);
         opacity: 0.9;
+        color: white;
       }
 
       .technologies {
@@ -62,6 +70,7 @@ section {
           background: rgba(100, 150, 255, 0.2);
           border-radius: 16px;
           font-size: 0.85rem;
+          color: white;
         }
       }
 
@@ -70,6 +79,7 @@ section {
         justify-content: space-between;
         margin-bottom: var(--spacing-md);
         font-size: 0.9rem;
+        color: white;
 
         .status {
           padding: 4px 12px;
@@ -94,6 +104,7 @@ section {
         padding-left: var(--spacing-lg);
         font-size: 0.9rem;
         opacity: 0.8;
+        color: white;
       }
 
       .project-links {
@@ -106,10 +117,10 @@ section {
           border-radius: 4px;
           text-decoration: none;
           transition: background 0.3s ease;
+          color: white;
 
           &.btn-github {
             background: rgba(100, 100, 100, 0.3);
-            color: inherit;
 
             &:hover {
               background: rgba(100, 100, 100, 0.5);
@@ -118,7 +129,6 @@ section {
 
           &.btn-live {
             background: rgba(100, 150, 255, 0.3);
-            color: inherit;
 
             &:hover {
               background: rgba(100, 150, 255, 0.5);

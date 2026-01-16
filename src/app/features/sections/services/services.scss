@@ -6,6 +6,12 @@ section {
 
   h2 {
     margin-bottom: var(--spacing-lg);
+    color: white;
+    font-size: 2.5rem;
+  }
+
+  p {
+    color: white;
   }
 
   .services-grid {
@@ -31,15 +37,18 @@ section {
       font-size: 2.5rem;
       margin-bottom: var(--spacing-md);
       opacity: 0.8;
+      color: white;
     }
 
     h3 {
       margin: 0 0 var(--spacing-md) 0;
+      color: white;
     }
 
     .service-description {
       margin-bottom: var(--spacing-lg);
       opacity: 0.9;
+      color: white;
     }
 
     .features,
@@ -49,6 +58,7 @@ section {
       h4 {
         margin: 0 0 var(--spacing-sm) 0;
         font-size: 0.95rem;
+        color: white;
       }
 
       ul {
@@ -58,6 +68,7 @@ section {
 
         li {
           margin-bottom: var(--spacing-xs);
+          color: white;
         }
       }
     }
@@ -68,6 +79,7 @@ section {
       h4 {
         margin: 0 0 var(--spacing-sm) 0;
         font-size: 0.95rem;
+        color: white;
       }
 
       .tech-tags {
@@ -80,6 +92,7 @@ section {
           background: rgba(100, 150, 255, 0.2);
           border-radius: 16px;
           font-size: 0.85rem;
+          color: white;
         }
       }
     }
@@ -87,6 +100,7 @@ section {
     .duration {
       font-size: 0.9rem;
       opacity: 0.8;
+      color: white;
     }
   }
 }
