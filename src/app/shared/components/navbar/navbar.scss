@@ -1,12 +1,21 @@
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-md) 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 1.25rem 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+
+  &.scrolled {
+    padding: 0.875rem 0;
+    background-color: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+  }
 
   .container {
     display: flex;
@@ -17,25 +26,70 @@
   &-brand a {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-primary);
+    color: white;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   &-menu {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: 2rem;
+    align-items: center;
 
     a {
-      color: var(--color-text);
+      color: #cbd5e1;
       font-weight: 500;
-      transition: color var(--transition-fast);
+      font-size: 0.95rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        transition: width 0.3s ease;
+      }
 
       &:hover {
-        color: var(--color-primary);
+        color: white;
+
+        &::after {
+          width: 100%;
+        }
+      }
+
+      &.active {
+        color: #3b82f6;
+        font-weight: 600;
+
+        &::after {
+          width: 100%;
+        }
       }
     }
   }
 }
 
-[data-theme="dark"] .navbar {
-  background-color: rgba(17, 24, 39, 0.9);
+@media (max-width: 768px) {
+  .navbar {
+    &-menu {
+      gap: 1rem;
+
+      a {
+        font-size: 0.875rem;
+      }
+    }
+  }
 }
