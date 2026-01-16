@@ -7,4 +7,70 @@ section {
   h2 {
     margin-bottom: var(--spacing-lg);
   }
+
+  .education-section {
+    margin-top: var(--spacing-xl);
+
+    h3 {
+      margin-bottom: var(--spacing-lg);
+    }
+  }
+
+  .education-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .education-card {
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .education-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-md);
+
+      h4 {
+        margin: 0;
+        flex: 1;
+      }
+
+      .education-period {
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+    }
+
+    .education-details {
+      .institution {
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .location {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .description {
+        margin: var(--spacing-md) 0;
+      }
+
+      .achievements {
+        margin-top: var(--spacing-md);
+        padding-left: var(--spacing-lg);
+      }
+    }
+  }
 }

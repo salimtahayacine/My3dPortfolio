@@ -80,20 +80,20 @@ But: transformer le 3D "wow" en portfolio convaincant pour recruteurs/clients. [
 
 Tâches:
 
-- [ ] 1. About & Education:
-   - [ ] Section "À propos" claire: ton rôle (Fullstack JS/Java), stack principale (Angular, Spring Boot, React Native).
-   - [ ] Timeline Education avec cards (école, formations en ligne, certificats).
-- [ ] 2. Professional Experience:
-   - [ ] Liste chronologique:
-     - [ ] Titre, entreprise/projet, technologies, résultats mesurables (KPIs).
-   - [ ] Intégrer e-commerce/dropshipping: stack utilisée, chiffres (commandes, taux de conversion si possible).
-- [ ] 3. Projects:
-   - [ ] Cards avec:
-     - [ ] Titre, courte description, stack, rôle, lien GitHub/live.
+- [x] 1. About & Education:
+   - [x] Section "À propos" claire: ton rôle (Fullstack JS/Java), stack principale (Angular, Spring Boot, React Native).
+   - [x] Timeline Education avec cards (école, formations en ligne, certificats).
+- [x] 2. Professional Experience:
+   - [x] Liste chronologique:
+     - [x] Titre, entreprise/projet, technologies, résultats mesurables (KPIs).
+   - [x] Intégrer e-commerce/dropshipping: stack utilisée, chiffres (commandes, taux de conversion si possible).
+- [x] 3. Projects:
+   - [x] Cards avec:
+     - [x] Titre, courte description, stack, rôle, lien GitHub/live.
    - [ ] Idée 3D: chaque projet = "carte" dans la scène; cliquer dessus ouvre la card dans l'UI 2D. [youtube](https://www.youtube.com/watch?v=FkowOdMjvYo)
-- [ ] 4. Services & Skills:
-   - [ ] Services (par ex: "Fullstack Web App", "E-commerce Store Setup", "Mobile App Prototype").
-   - [ ] Skill tags: Angular, Spring Boot, PostgreSQL, Redis, Docker, CI/CD, etc.
+- [x] 4. Services & Skills:
+   - [x] Services (par ex: "Fullstack Web App", "E-commerce Store Setup", "Mobile App Prototype").
+   - [x] Skill tags: Angular, Spring Boot, PostgreSQL, Redis, Docker, CI/CD, etc.
 - [ ] 5. Contact:
    - [ ] Formulaire (nom, email, message) + validations.
    - [ ] Boutons vers LinkedIn, GitHub, YouCan store, etc.

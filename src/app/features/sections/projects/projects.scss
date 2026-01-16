@@ -7,4 +7,125 @@ section {
   h2 {
     margin-bottom: var(--spacing-lg);
   }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+  }
+
+  .project-card {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .project-content {
+      padding: var(--spacing-lg);
+
+      h3 {
+        margin: 0 0 var(--spacing-md) 0;
+      }
+
+      .project-description {
+        margin-bottom: var(--spacing-md);
+        opacity: 0.9;
+      }
+
+      .technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+
+        .tech-badge {
+          padding: 4px 12px;
+          background: rgba(100, 150, 255, 0.2);
+          border-radius: 16px;
+          font-size: 0.85rem;
+        }
+      }
+
+      .project-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-md);
+        font-size: 0.9rem;
+
+        .status {
+          padding: 4px 12px;
+          border-radius: 16px;
+
+          &.status-completed {
+            background: rgba(0, 255, 100, 0.2);
+          }
+
+          &.status-in-progress {
+            background: rgba(255, 200, 0, 0.2);
+          }
+
+          &.status-planned {
+            background: rgba(150, 150, 150, 0.2);
+          }
+        }
+      }
+
+      .highlights {
+        margin: var(--spacing-md) 0;
+        padding-left: var(--spacing-lg);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      .project-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+
+        a {
+          padding: 8px 16px;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: background 0.3s ease;
+
+          &.btn-github {
+            background: rgba(100, 100, 100, 0.3);
+            color: inherit;
+
+            &:hover {
+              background: rgba(100, 100, 100, 0.5);
+            }
+          }
+
+          &.btn-live {
+            background: rgba(100, 150, 255, 0.3);
+            color: inherit;
+
+            &:hover {
+              background: rgba(100, 150, 255, 0.5);
+            }
+          }
+        }
+      }
+    }
+  }
 }
