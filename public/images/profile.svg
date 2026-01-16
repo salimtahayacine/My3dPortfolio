@@ -1,0 +1,22 @@
+<svg width="500" height="600" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="250" cy="200" r="120" fill="url(#gradient1)" opacity="0.3"/>
+  
+  <!-- Person silhouette -->
+  <circle cx="250" cy="180" r="50" fill="url(#gradient1)"/>
+  <path d="M 150 320 Q 150 260, 250 260 Q 350 260, 350 320 L 350 400 Q 350 450, 250 450 Q 150 450, 150 400 Z" fill="url(#gradient1)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="20" fill="#3b82f6" opacity="0.2"/>
+  <circle cx="400" cy="150" r="25" fill="#8b5cf6" opacity="0.2"/>
+  <circle cx="380" cy="450" r="30" fill="#ec4899" opacity="0.2"/>
+  <circle cx="120" cy="500" r="22" fill="#10b981" opacity="0.2"/>
+</svg>
