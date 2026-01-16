@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Education, Experience, Project, Service } from '../models';
 
+// TODO: Consider moving these to a configuration file for better maintainability
+const ACHIEVEMENT_FILTER_KEYWORDS = ['technolog', 'environnement', 'outils de travail'];
+const TECHNOLOGY_KEYWORDS = ['Java', 'Spring Boot', 'Angular', 'PostgreSQL', 'Vue.js', 'React', 'Node.js', 'MongoDB'];
+
 interface ProfileData {
   personalInfo: any;
   about: any;
@@ -106,9 +110,7 @@ export class ProfileDataService {
         description: exp.responsibilities[0] || '',
         technologies: technologies,
         achievements: exp.responsibilities.slice(1).filter((r: string) => 
-          !r.toLowerCase().includes('technolog') && 
-          !r.toLowerCase().includes('environnement') &&
-          !r.toLowerCase().includes('outils de travail')
+          !ACHIEVEMENT_FILTER_KEYWORDS.some(keyword => r.toLowerCase().includes(keyword))
         ),
         kpis: []
       };
@@ -181,7 +183,8 @@ export class ProfileDataService {
   private extractLocation(text: string): string {
     if (!text) return '';
     
-    // Try splitting by 'l' which seems to be used as a separator in the data
+    // NOTE: The data format uses ' l ' (space-L-space) as a separator between company and location
+    // Example: "DEVOX l Temara Centre ville"
     const parts = text.split(/\sl\s/);
     if (parts.length > 1) {
       return parts[parts.length - 1].trim();
@@ -201,7 +204,8 @@ export class ProfileDataService {
       return { company: '', location: '' };
     }
     
-    // Split by 'l' (lowercase L) which appears to be used as a separator
+    // NOTE: The profile-data.json format uses ' l ' (space-L-space) as a separator
+    // Split by ' l ' which appears to be used as a separator in the source data
     // Example: "SOCIETÉ PIETRANOBILE SARL l Fkih ben Salah"
     const parts = companyString.split(/\sl\s/);
     
@@ -243,10 +247,9 @@ export class ProfileDataService {
   }
 
   private extractTechnologiesFromDescription(description: string): string[] {
-    const techKeywords = ['Java', 'Spring Boot', 'Angular', 'PostgreSQL', 'Vue.js', 'React', 'Node.js', 'MongoDB'];
     const found: string[] = [];
     
-    for (const tech of techKeywords) {
+    for (const tech of TECHNOLOGY_KEYWORDS) {
       if (description.includes(tech)) {
         found.push(tech);
       }
