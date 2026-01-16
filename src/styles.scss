@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Import Tailwind CSS v4 */
+@use "tailwindcss";
+
 /* Design System - Color Palette */
 :root {
   /* Primary Colors */
