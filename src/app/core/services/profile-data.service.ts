@@ -92,20 +92,24 @@ export class ProfileDataService {
   private transformExperience(experienceData: any[]): Experience[] {
     return experienceData.map((exp, index) => {
       const period = this.parsePeriod(exp.period);
-      const location = this.extractLocation(exp.company);
+      const { company, location } = this.parseCompanyAndLocation(exp.company);
       const technologies = this.extractTechnologies(exp.responsibilities);
       
       return {
         id: (index + 1).toString(),
         title: exp.title || '',
-        company: exp.company ? exp.company.split('l')[0].trim() : '',
+        company: company,
         location: location,
         startDate: period.startDate,
         endDate: period.endDate,
         current: period.current,
         description: exp.responsibilities[0] || '',
         technologies: technologies,
-        achievements: exp.responsibilities.slice(1).filter((r: string) => !r.toLowerCase().includes('technolog') && !r.toLowerCase().includes('environnement')),
+        achievements: exp.responsibilities.slice(1).filter((r: string) => 
+          !r.toLowerCase().includes('technolog') && 
+          !r.toLowerCase().includes('environnement') &&
+          !r.toLowerCase().includes('outils de travail')
+        ),
         kpis: []
       };
     });
@@ -133,7 +137,10 @@ export class ProfileDataService {
 
   private transformServices(servicesData: any[]): Service[] {
     return servicesData.map((svc, index) => {
-      const features = svc.description.split('\r\n').map((f: string) => f.trim()).filter((f: string) => f.length > 0);
+      const features = svc.description
+        .split(/[\r\n]+/)
+        .map((f: string) => f.trim())
+        .filter((f: string) => f.length > 0);
       
       return {
         id: (index + 1).toString(),
@@ -174,11 +181,13 @@ export class ProfileDataService {
   private extractLocation(text: string): string {
     if (!text) return '';
     
-    const parts = text.split('l');
+    // Try splitting by 'l' which seems to be used as a separator in the data
+    const parts = text.split(/\sl\s/);
     if (parts.length > 1) {
       return parts[parts.length - 1].trim();
     }
     
+    // Fallback to comma separation
     const commaParts = text.split(',');
     if (commaParts.length > 1) {
       return commaParts[commaParts.length - 1].trim();
@@ -187,20 +196,50 @@ export class ProfileDataService {
     return '';
   }
 
+  private parseCompanyAndLocation(companyString: string): { company: string; location: string } {
+    if (!companyString) {
+      return { company: '', location: '' };
+    }
+    
+    // Split by 'l' (lowercase L) which appears to be used as a separator
+    // Example: "SOCIETÉ PIETRANOBILE SARL l Fkih ben Salah"
+    const parts = companyString.split(/\sl\s/);
+    
+    if (parts.length >= 2) {
+      return {
+        company: parts[0].trim(),
+        location: parts[1].trim()
+      };
+    }
+    
+    // If no 'l' separator, try comma
+    const commaParts = companyString.split(',');
+    if (commaParts.length >= 2) {
+      return {
+        company: commaParts[0].trim(),
+        location: commaParts.slice(1).join(',').trim()
+      };
+    }
+    
+    // No separator found, return entire string as company
+    return { company: companyString.trim(), location: '' };
+  }
+
   private extractTechnologies(responsibilities: string[]): string[] {
     const technologies: string[] = [];
+    const techPattern = /technolog(?:ies)?[:\s]/i;
     
     for (const resp of responsibilities) {
-      if (resp.toLowerCase().includes('technolog')) {
-        const techLine = resp.split(':')[1];
+      if (techPattern.test(resp)) {
+        const techLine = resp.split(/technolog(?:ies)?[:\s]/i)[1];
         if (techLine) {
-          const techs = techLine.split(',').map(t => t.trim());
+          const techs = techLine.split(',').map(t => t.trim()).filter(t => t.length > 0);
           technologies.push(...techs);
         }
       }
     }
     
-    return technologies.filter(t => t.length > 0);
+    return technologies;
   }
 
   private extractTechnologiesFromDescription(description: string): string[] {

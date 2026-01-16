@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Education } from '../../../core/models';
+import { DateUtils } from '../../../shared/utils/date.utils';
 
 @Component({
   selector: 'app-about',
@@ -21,7 +22,6 @@ export class About implements OnInit {
   }
 
   formatDate(date: Date | undefined): string {
-    if (!date) return '';
-    return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'short' });
+    return DateUtils.formatDate(date);
   }
 }
