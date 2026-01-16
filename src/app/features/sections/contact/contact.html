@@ -1,6 +1,89 @@
 <section class="contact-section">
   <div class="container">
-    <h2>Contact</h2>
-    <p>Get in touch with me for collaborations or inquiries.</p>
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Let's collaborate and build something amazing together!</p>
+
+    <div class="contact-content">
+      <div class="contact-form-wrapper">
+        <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="formData.name"
+              placeholder="Your Name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="formData.email"
+              placeholder="your.email@example.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              [(ngModel)]="formData.message"
+              placeholder="Your message..."
+              rows="6"
+              required
+            ></textarea>
+          </div>
+
+          @if (formSubmitted) {
+            <div class="success-message">
+              ✓ Message sent successfully! I'll get back to you soon.
+            </div>
+          }
+
+          @if (formError) {
+            <div class="error-message">
+              ✗ Please fill in all fields with valid information.
+            </div>
+          }
+
+          <button type="submit" class="submit-btn">
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-card">
+          <h3>Let's Connect</h3>
+          <p>Feel free to reach out through any of these channels:</p>
+          
+          <div class="social-links">
+            @for (link of socialLinks; track link.name) {
+              <a [href]="link.url" target="_blank" class="social-link">
+                <span class="icon">{{ link.icon }}</span>
+                <span class="label">{{ link.name }}</span>
+              </a>
+            }
+          </div>
+        </div>
+
+        <div class="info-card availability">
+          <h4>Availability</h4>
+          <p>Currently open to new opportunities and collaborations.</p>
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span>Available for work</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
