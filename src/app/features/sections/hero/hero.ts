@@ -12,6 +12,9 @@ export class Hero implements OnInit, AfterViewInit {
   @ViewChild('heroSubtitle') heroSubtitle!: ElementRef;
   @ViewChild('heroImage') heroImage!: ElementRef;
 
+  private readonly PARALLAX_SPEED = 0.5;
+  private readonly FADE_DISTANCE = 500;
+
   ngOnInit(): void {
   }
 
@@ -21,15 +24,16 @@ export class Hero implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
+    if (!this.heroImage?.nativeElement) return;
+    
     const scrollY = window.scrollY;
     const heroImageElement = this.heroImage.nativeElement;
     
     // Parallax effect: image moves slower than scroll
-    const parallaxSpeed = 0.5;
-    heroImageElement.style.transform = `translateY(${scrollY * parallaxSpeed}px)`;
+    heroImageElement.style.transform = `translateY(${scrollY * this.PARALLAX_SPEED}px)`;
     
     // Fade out effect as user scrolls
-    const opacity = Math.max(0, 1 - scrollY / 500);
+    const opacity = Math.max(0, 1 - scrollY / this.FADE_DISTANCE);
     heroImageElement.style.opacity = opacity.toString();
   }
 
@@ -38,12 +42,14 @@ export class Hero implements OnInit, AfterViewInit {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     // Animate hero image
-    tl.from(this.heroImage.nativeElement, {
-      scale: 0.8,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'power3.out'
-    });
+    if (this.heroImage?.nativeElement) {
+      tl.from(this.heroImage.nativeElement, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.out'
+      });
+    }
 
     // Animate title with split text effect
     tl.from(this.heroTitle.nativeElement, {
