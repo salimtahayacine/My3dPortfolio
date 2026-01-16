@@ -1,24 +1,40 @@
 <section class="about-section">
   <div class="container">
-    <h2>About Me</h2>
-    <p>Passionate Fullstack Developer specializing in Angular, Spring Boot, and React Native.</p>
+    <h2 class="section-title">About Me</h2>
+    <p class="intro-text">
+      Passionate Fullstack Developer specializing in Angular, Spring Boot, and React Native. 
+      I build scalable web and mobile applications with a focus on clean code and exceptional user experiences.
+    </p>
     
+    <div class="skills-highlight">
+      <div class="skill-badge">Frontend: Angular, React</div>
+      <div class="skill-badge">Backend: Spring Boot, Node.js</div>
+      <div class="skill-badge">Mobile: React Native</div>
+      <div class="skill-badge">DevOps: Docker, CI/CD</div>
+    </div>
+
     <div class="education-section">
-      <h3>Education</h3>
+      <h3 class="subsection-title">Education & Certifications</h3>
       <div class="education-timeline">
         @for (edu of education; track edu.id) {
-          <div class="education-card">
+          <div class="education-card" #educationCard>
+            <div class="card-accent"></div>
             <div class="education-header">
-              <h4>{{ edu.degree }}</h4>
-              <span class="education-period">
-                {{ formatDate(edu.startDate) }} - {{ edu.current ? 'Present' : formatDate(edu.endDate) }}
-              </span>
+              <div class="title-section">
+                <h4>{{ edu.degree }}</h4>
+                <p class="institution">{{ edu.institution }}</p>
+              </div>
+              <div class="meta-section">
+                <span class="education-period">
+                  {{ formatDate(edu.startDate) }} - {{ edu.current ? 'Present' : formatDate(edu.endDate) }}
+                </span>
+                @if (edu.location) {
+                  <span class="location">{{ edu.location }}</span>
+                }
+              </div>
             </div>
+            
             <div class="education-details">
-              <p class="institution">{{ edu.institution }}</p>
-              @if (edu.location) {
-                <p class="location">{{ edu.location }}</p>
-              }
               @if (edu.description) {
                 <p class="description">{{ edu.description }}</p>
               }
