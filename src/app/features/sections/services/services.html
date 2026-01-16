@@ -1,14 +1,14 @@
 <section class="services-section">
   <div class="container">
-    <h2>Services</h2>
-    <p>Professional services I offer to help bring your ideas to life.</p>
+    <h2 class="section-title">Services & Expertise</h2>
+    <p class="section-subtitle">Professional services I offer to help bring your ideas to life.</p>
     
     <div class="services-grid">
       @for (service of services; track service.id) {
-        <div class="service-card">
+        <div class="service-card" #serviceCard>
           @if (service.icon) {
             <div class="service-icon">
-              <i class="icon-{{ service.icon }}"></i>
+              <span class="icon-wrapper">{{ service.icon }}</span>
             </div>
           }
           
@@ -17,7 +17,7 @@
           
           @if (service.features && service.features.length > 0) {
             <div class="features">
-              <h4>Features:</h4>
+              <h4>Key Features:</h4>
               <ul>
                 @for (feature of service.features; track feature) {
                   <li>{{ feature }}</li>
@@ -28,7 +28,6 @@
           
           @if (service.technologies && service.technologies.length > 0) {
             <div class="technologies">
-              <h4>Technologies:</h4>
               <div class="tech-tags">
                 @for (tech of service.technologies; track tech) {
                   <span class="tech-tag">{{ tech }}</span>
@@ -39,7 +38,7 @@
           
           @if (service.deliverables && service.deliverables.length > 0) {
             <div class="deliverables">
-              <h4>Deliverables:</h4>
+              <h4>What You Get:</h4>
               <ul>
                 @for (deliverable of service.deliverables; track deliverable) {
                   <li>{{ deliverable }}</li>
@@ -50,7 +49,8 @@
           
           @if (service.estimatedDuration) {
             <div class="duration">
-              <strong>Estimated Duration:</strong> {{ service.estimatedDuration }}
+              <span class="duration-label">Timeline:</span> 
+              <span class="duration-value">{{ service.estimatedDuration }}</span>
             </div>
           }
         </div>

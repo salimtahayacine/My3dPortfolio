@@ -1,33 +1,45 @@
 <section class="projects-section">
   <div class="container">
-    <h2>Projects</h2>
-    <p>Featured projects showcasing my technical skills and creativity.</p>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">Showcasing my technical skills and creativity through real-world applications.</p>
     
     <div class="projects-grid">
       @for (project of projects; track project.id) {
-        <div class="project-card">
+        <div class="project-card" #projectCard>
           @if (project.imageUrl) {
             <div class="project-image">
               <img [src]="project.imageUrl" [alt]="project.title">
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  @if (project.githubUrl) {
+                    <a [href]="project.githubUrl" target="_blank" class="icon-btn">
+                      <span>📦</span>
+                    </a>
+                  }
+                  @if (project.liveUrl) {
+                    <a [href]="project.liveUrl" target="_blank" class="icon-btn">
+                      <span>🔗</span>
+                    </a>
+                  }
+                </div>
+              </div>
             </div>
           }
           
           <div class="project-content">
-            <h3>{{ project.title }}</h3>
+            <div class="project-header">
+              <h3>{{ project.title }}</h3>
+              <span class="status-badge" [class]="'status-' + project.status">{{ project.status }}</span>
+            </div>
+            
             <p class="project-description">{{ project.shortDescription }}</p>
             
-            @if (project.technologies && project.technologies.length > 0) {
-              <div class="technologies">
-                @for (tech of project.technologies; track tech) {
-                  <span class="tech-badge">{{ tech }}</span>
-                }
+            @if (project.role) {
+              <div class="project-role">
+                <span class="role-label">Role:</span>
+                <span class="role-value">{{ project.role }}</span>
               </div>
             }
-            
-            <div class="project-meta">
-              <span class="role">{{ project.role }}</span>
-              <span class="status" [class]="'status-' + project.status">{{ project.status }}</span>
-            </div>
             
             @if (project.highlights && project.highlights.length > 0) {
               <ul class="highlights">
@@ -37,14 +49,22 @@
               </ul>
             }
             
-            <div class="project-links">
+            @if (project.technologies && project.technologies.length > 0) {
+              <div class="technologies">
+                @for (tech of project.technologies; track tech) {
+                  <span class="tech-badge">{{ tech }}</span>
+                }
+              </div>
+            }
+            
+            <div class="project-actions">
               @if (project.githubUrl) {
-                <a [href]="project.githubUrl" target="_blank" class="btn-github">
-                  GitHub
+                <a [href]="project.githubUrl" target="_blank" class="btn-secondary">
+                  View Code
                 </a>
               }
               @if (project.liveUrl) {
-                <a [href]="project.liveUrl" target="_blank" class="btn-live">
+                <a [href]="project.liveUrl" target="_blank" class="btn-primary">
                   Live Demo
                 </a>
               }

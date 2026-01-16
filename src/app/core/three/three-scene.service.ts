@@ -100,53 +100,92 @@ export class ThreeSceneService implements OnDestroy {
   }
 
   /**
-   * Setup basic scene objects (room, desk, panels, etc.)
+   * Setup modern 3D objects inspired by Awwwards portfolios
    */
   private setupSceneObjects(): void {
     if (!this.scene) return;
 
     // On mobile, use simpler geometries with lower detail
-    const sphereDetail = this.isMobile ? 16 : 32;
-    const torusDetail = this.isMobile ? 8 : 16;
+    const detail = this.isMobile ? 0 : 1;
 
-    // Create a simple rotating cube as a placeholder
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial({ 
+    // 1. Central Icosahedron - Modern geometric shape
+    const icoGeometry = new THREE.IcosahedronGeometry(1, detail);
+    const icoMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x3b82f6,
-      metalness: 0.5,
-      roughness: 0.5
+      metalness: 0.8,
+      roughness: 0.2,
+      emissive: 0x1e3a8a,
+      emissiveIntensity: 0.2
     });
-    const cube = new THREE.Mesh(geometry, material);
-    cube.name = 'interactive-cube';
-    this.scene.add(cube);
-    this.interactiveObjects.push(cube);
+    const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
+    icosahedron.name = 'interactive-icosahedron';
+    this.scene.add(icosahedron);
+    this.interactiveObjects.push(icosahedron);
 
-    // Add wireframe sphere (skip on mobile for performance)
+    // 2. Floating Octahedron - Abstract shape
+    const octaGeometry = new THREE.OctahedronGeometry(0.7, detail);
+    const octaMaterial = new THREE.MeshStandardMaterial({ 
+      color: 0x8b5cf6,
+      metalness: 0.9,
+      roughness: 0.1,
+      emissive: 0x4c1d95,
+      emissiveIntensity: 0.3
+    });
+    const octahedron = new THREE.Mesh(octaGeometry, octaMaterial);
+    octahedron.position.set(-2.5, 1, 0);
+    octahedron.name = 'interactive-octahedron';
+    this.scene.add(octahedron);
+    this.interactiveObjects.push(octahedron);
+
+    // 3. Ring System - Popular in modern portfolios
+    const torusDetail = this.isMobile ? 8 : 16;
+    const ringGeometry = new THREE.TorusGeometry(0.8, 0.08, torusDetail, 64);
+    const ringMaterial = new THREE.MeshStandardMaterial({ 
+      color: 0xec4899,
+      metalness: 0.9,
+      roughness: 0.1,
+      emissive: 0x831843,
+      emissiveIntensity: 0.4
+    });
+    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+    ring.position.set(2.5, -0.5, 0);
+    ring.rotation.x = Math.PI / 4;
+    ring.name = 'interactive-ring';
+    this.scene.add(ring);
+    this.interactiveObjects.push(ring);
+
+    // 4. Dodecahedron - Complex geometric form (skip on mobile)
     if (!this.isMobile) {
-      const sphereGeometry = new THREE.SphereGeometry(0.5, sphereDetail, sphereDetail);
-      const sphereMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0x8b5cf6,
+      const dodecaGeometry = new THREE.DodecahedronGeometry(0.6, detail);
+      const dodecaMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0x10b981,
+        metalness: 0.7,
+        roughness: 0.3,
         wireframe: true
       });
-      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-      sphere.position.set(-2, 0, 0);
-      sphere.name = 'interactive-sphere';
-      this.scene.add(sphere);
-      this.interactiveObjects.push(sphere);
+      const dodecahedron = new THREE.Mesh(dodecaGeometry, dodecaMaterial);
+      dodecahedron.position.set(0, -2, -1);
+      dodecahedron.name = 'interactive-dodecahedron';
+      this.scene.add(dodecahedron);
+      this.interactiveObjects.push(dodecahedron);
     }
 
-    // Add torus
-    const torusGeometry = new THREE.TorusGeometry(0.5, 0.2, torusDetail, 100);
-    const torusMaterial = new THREE.MeshStandardMaterial({ 
-      color: 0xec4899,
-      metalness: 0.7,
-      roughness: 0.3
+    // 5. Nested rings - Double ring system
+    const ring2Geometry = new THREE.TorusGeometry(0.8, 0.06, torusDetail, 64);
+    const ring2Material = new THREE.MeshStandardMaterial({ 
+      color: 0xf59e0b,
+      metalness: 0.9,
+      roughness: 0.1,
+      emissive: 0x78350f,
+      emissiveIntensity: 0.3
     });
-    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-    torus.position.set(2, 0, 0);
-    torus.name = 'interactive-torus';
-    this.scene.add(torus);
-    this.interactiveObjects.push(torus);
+    const ring2 = new THREE.Mesh(ring2Geometry, ring2Material);
+    ring2.position.set(2.5, -0.5, 0);
+    ring2.rotation.x = Math.PI / 4;
+    ring2.rotation.y = Math.PI / 2;
+    ring2.name = 'interactive-ring2';
+    this.scene.add(ring2);
+    this.interactiveObjects.push(ring2);
   }
 
   /**
@@ -249,14 +288,18 @@ export class ThreeSceneService implements OnDestroy {
       // Map 3D objects to sections
       let targetSection = '';
       switch (object.name) {
-        case 'interactive-cube':
+        case 'interactive-icosahedron':
           targetSection = 'about';
           break;
-        case 'interactive-sphere':
+        case 'interactive-octahedron':
           targetSection = 'projects';
           break;
-        case 'interactive-torus':
+        case 'interactive-ring':
+        case 'interactive-ring2':
           targetSection = 'services';
+          break;
+        case 'interactive-dodecahedron':
+          targetSection = 'experience';
           break;
       }
 
