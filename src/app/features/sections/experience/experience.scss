@@ -7,4 +7,116 @@ section {
   h2 {
     margin-bottom: var(--spacing-lg);
   }
+
+  .experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+  }
+
+  .experience-card {
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+
+      .title-company {
+        flex: 1;
+
+        h3 {
+          margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        h4 {
+          margin: 0;
+          font-weight: 500;
+          opacity: 0.9;
+        }
+      }
+
+      .period-location {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: var(--spacing-xs);
+        font-size: 0.9rem;
+
+        .period {
+          opacity: 0.8;
+        }
+
+        .location {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .experience-details {
+      .description {
+        margin-bottom: var(--spacing-md);
+      }
+
+      .technologies {
+        margin-bottom: var(--spacing-md);
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--spacing-sm);
+          margin-top: var(--spacing-sm);
+
+          .tech-tag {
+            padding: 4px 12px;
+            background: rgba(100, 150, 255, 0.2);
+            border-radius: 16px;
+            font-size: 0.85rem;
+          }
+        }
+      }
+
+      .achievements {
+        margin-bottom: var(--spacing-md);
+
+        ul {
+          margin-top: var(--spacing-sm);
+          padding-left: var(--spacing-lg);
+        }
+      }
+
+      .kpis {
+        display: flex;
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-md);
+
+        .kpi {
+          display: flex;
+          flex-direction: column;
+
+          .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+          }
+
+          .kpi-metric {
+            font-size: 0.85rem;
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
 }

@@ -7,4 +7,86 @@ section {
   h2 {
     margin-bottom: var(--spacing-lg);
   }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+  }
+
+  .service-card {
+    padding: var(--spacing-xl);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-md);
+      opacity: 0.8;
+    }
+
+    h3 {
+      margin: 0 0 var(--spacing-md) 0;
+    }
+
+    .service-description {
+      margin-bottom: var(--spacing-lg);
+      opacity: 0.9;
+    }
+
+    .features,
+    .deliverables {
+      margin-bottom: var(--spacing-lg);
+
+      h4 {
+        margin: 0 0 var(--spacing-sm) 0;
+        font-size: 0.95rem;
+      }
+
+      ul {
+        padding-left: var(--spacing-lg);
+        font-size: 0.9rem;
+        opacity: 0.8;
+
+        li {
+          margin-bottom: var(--spacing-xs);
+        }
+      }
+    }
+
+    .technologies {
+      margin-bottom: var(--spacing-lg);
+
+      h4 {
+        margin: 0 0 var(--spacing-sm) 0;
+        font-size: 0.95rem;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+
+        .tech-tag {
+          padding: 4px 12px;
+          background: rgba(100, 150, 255, 0.2);
+          border-radius: 16px;
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    .duration {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
 }

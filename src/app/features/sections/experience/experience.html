@@ -1,6 +1,64 @@
 <section class="experience-section">
   <div class="container">
-    <h2>Experience</h2>
+    <h2>Professional Experience</h2>
     <p>Professional experience and achievements in fullstack development.</p>
+    
+    <div class="experience-timeline">
+      @for (exp of experiences; track exp.id) {
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="title-company">
+              <h3>{{ exp.title }}</h3>
+              <h4>{{ exp.company }}</h4>
+            </div>
+            <div class="period-location">
+              <span class="period">
+                {{ formatDate(exp.startDate) }} - {{ exp.current ? 'Present' : formatDate(exp.endDate) }}
+              </span>
+              @if (exp.location) {
+                <span class="location">{{ exp.location }}</span>
+              }
+            </div>
+          </div>
+          
+          <div class="experience-details">
+            <p class="description">{{ exp.description }}</p>
+            
+            @if (exp.technologies && exp.technologies.length > 0) {
+              <div class="technologies">
+                <strong>Technologies:</strong>
+                <div class="tech-tags">
+                  @for (tech of exp.technologies; track tech) {
+                    <span class="tech-tag">{{ tech }}</span>
+                  }
+                </div>
+              </div>
+            }
+            
+            @if (exp.achievements && exp.achievements.length > 0) {
+              <div class="achievements">
+                <strong>Achievements:</strong>
+                <ul>
+                  @for (achievement of exp.achievements; track achievement) {
+                    <li>{{ achievement }}</li>
+                  }
+                </ul>
+              </div>
+            }
+            
+            @if (exp.kpis && exp.kpis.length > 0) {
+              <div class="kpis">
+                @for (kpi of exp.kpis; track kpi.metric) {
+                  <div class="kpi">
+                    <span class="kpi-value">{{ kpi.value }}</span>
+                    <span class="kpi-metric">{{ kpi.metric }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
   </div>
 </section>
