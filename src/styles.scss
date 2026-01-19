@@ -112,9 +112,14 @@ button {
 
 /* Utility Classes */
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
 }
 
 .text-center {
@@ -133,13 +138,46 @@ button {
 
 /* Ensure sections appear above Three.js scene */
 section {
+  padding: 100px 0;
+  margin-bottom: 80px;
   position: relative;
-  z-index: 1;
+  
+  @media (max-width: 768px) {
+    padding: 60px 0;
+    margin-bottom: 60px;
+  }
 }
 
 /* Ensure navbar appears above everything */
 nav.navbar {
   position: relative;
   z-index: 100;
+}
+
+/* Modern glassmorphism utility */
+.glass-effect {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Modern animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
 }
 

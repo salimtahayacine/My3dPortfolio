@@ -2,7 +2,17 @@
   position: relative;
   width: 100%;
   background: #0f172a;
+// Modern container system
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+}
   // Ensure sections are properly spaced for scrolling
   section,
   app-hero,
@@ -15,5 +25,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px 0;
   }
 }

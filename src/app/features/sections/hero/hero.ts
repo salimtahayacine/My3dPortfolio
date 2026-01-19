@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { gsap } from 'gsap';
+import Typed from 'typed.js';
 
 @Component({
   selector: 'app-hero',
@@ -11,15 +12,38 @@ export class Hero implements OnInit, AfterViewInit {
   @ViewChild('heroTitle') heroTitle!: ElementRef;
   @ViewChild('heroSubtitle') heroSubtitle!: ElementRef;
   @ViewChild('heroImage') heroImage!: ElementRef;
+    @ViewChild('typedElement') typedElement!: ElementRef;
+
 
   private readonly PARALLAX_SPEED = 0.5;
   private readonly FADE_DISTANCE = 500;
+  private typed: Typed | undefined;
+
 
   ngOnInit(): void {
+  }
+  initTyped(): void {
+    const options = {
+      strings: [
+        'Front-end Developer',
+        'Back-end Developer',
+        'Mobile Developer',
+        'Designer'
+      ],
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    };
+
+    this.typed = new Typed('.typed', options);
   }
 
   ngAfterViewInit(): void {
     this.animateHero();
+    this.initTyped();
   }
 
   @HostListener('window:scroll', [])
@@ -66,4 +90,11 @@ export class Hero implements OnInit, AfterViewInit {
       duration: 0.8
     }, '-=0.5');
   }
+
+  ngOnDestroy(): void {
+    if (this.typed) {
+      this.typed.destroy();
+    }
+  }
+
 }

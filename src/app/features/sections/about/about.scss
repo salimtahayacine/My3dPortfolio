@@ -1,27 +1,87 @@
 .about-section {
-  min-height: 100vh;
-  padding: 6rem 0;
-  background: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
+  min-height: 80vh;
+  padding: 100px 0;
+  margin-bottom: 80px;
+  background: linear-gradient(to bottom, #0f172a7d 0%, #1e293b7b 100%);
   position: relative;
+  padding-bottom: 150px;
+  border-radius: 10px;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
 
   .section-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .intro-text {
-    text-align: center;
-    color: #cbd5e1;
-    font-size: 1.125rem;
-    line-height: 1.8;
-    max-width: 800px;
-    margin: 0 auto 3rem;
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+
+    .about-text {
+      p {
+        color: #cbd5e1;
+        line-height: 1.8;
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .about-info {
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .label {
+          color: #94a3b8;
+          font-weight: 600;
+        }
+
+        .value {
+          color: #f1f5f9;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+    margin-bottom: 60px;
+
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
 
   .skills-highlight {
