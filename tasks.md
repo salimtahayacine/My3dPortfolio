@@ -98,6 +98,14 @@ Tâches:
    - [ ] Formulaire (nom, email, message) + validations.
    - [ ] Boutons vers LinkedIn, GitHub, YouCan store, etc.
 
+## 5.1. Bug Fix – Data Display Issue (Jan 2026)
+
+- [x] Fixed data display issue in all sections (About, Experience, Projects, Services)
+   - [x] Problem: Components using `ChangeDetectionStrategy.OnPush` were not displaying data from ProfileDataService
+   - [x] Solution: Added `ChangeDetectorRef` injection and called `markForCheck()` after async data loads
+   - [x] Affected components: About, Experience, Projects, Services
+   - [x] Result: All sections now correctly display education, experience, projects, and services data
+
 ## 6. Phase 5 – Performance, UX & SEO
 
 But: garder le "wow" 3D mais avec de bonnes perfs et un chargement rapide. [discourse.threejs](https://discourse.threejs.org/t/interactive-3d-portfolio-scroll-experience/46109)
