@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Project } from '../../../core/models';
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
   imports: [CommonModule],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Projects implements OnInit, AfterViewInit {
   @ViewChildren('projectCard') projectCards!: QueryList<ElementRef>;
