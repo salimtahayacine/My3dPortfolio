@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { gsap } from 'gsap';
 import Typed from 'typed.js';
 
@@ -7,6 +7,7 @@ import Typed from 'typed.js';
   imports: [],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Hero implements OnInit, AfterViewInit {
   @ViewChild('heroTitle') heroTitle!: ElementRef;

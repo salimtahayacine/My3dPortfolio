@@ -26,9 +26,33 @@ export class ThreeSceneService implements OnDestroy {
   private targetCameraPosition = new THREE.Vector3(0, 0, 5);
   private targetCameraRotation = new THREE.Euler(0, 0, 0);
   private isMobile: boolean = false;
+  private isTabActive: boolean = true;
 
   constructor(private scrollService: ScrollService) {
     this.isMobile = this.detectMobile();
+    this.setupVisibilityListener();
+  }
+
+  /**
+   * Setup visibility change listener to pause animation when tab is inactive
+   */
+  private setupVisibilityListener(): void {
+    document.addEventListener('visibilitychange', () => {
+      this.isTabActive = !document.hidden;
+      
+      if (this.isTabActive) {
+        // Resume animation when tab becomes active
+        if (!this.animationFrameId) {
+          this.animate();
+        }
+      } else {
+        // Pause animation when tab becomes inactive
+        if (this.animationFrameId !== null) {
+          cancelAnimationFrame(this.animationFrameId);
+          this.animationFrameId = null;
+        }
+      }
+    });
   }
 
   /**
@@ -203,7 +227,7 @@ export class ThreeSceneService implements OnDestroy {
    * Animation loop
    */
   private animate = (): void => {
-    if (!this.scene || !this.camera || !this.renderer) return;
+    if (!this.scene || !this.camera || !this.renderer || !this.isTabActive) return;
 
     this.animationFrameId = requestAnimationFrame(this.animate);
 
