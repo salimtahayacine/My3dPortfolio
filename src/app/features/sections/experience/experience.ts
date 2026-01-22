@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Experience as ExperienceModel } from '../../../core/models';
@@ -20,11 +20,15 @@ export class Experience implements OnInit, AfterViewInit {
   
   experiences: ExperienceModel[] = [];
 
-  constructor(private profileDataService: ProfileDataService) {}
+  constructor(
+    private profileDataService: ProfileDataService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.profileDataService.getExperience().subscribe(data => {
       this.experiences = data;
+      this.cdr.markForCheck();
     });
   }
 

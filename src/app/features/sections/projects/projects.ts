@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Project } from '../../../core/models';
@@ -19,11 +19,15 @@ export class Projects implements OnInit, AfterViewInit {
   
   projects: Project[] = [];
 
-  constructor(private profileDataService: ProfileDataService) {}
+  constructor(
+    private profileDataService: ProfileDataService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.profileDataService.getProjects().subscribe(data => {
       this.projects = data;
+      this.cdr.markForCheck();
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Service } from '../../../core/models';
@@ -19,11 +19,15 @@ export class Services implements OnInit, AfterViewInit {
   
   services: Service[] = [];
 
-  constructor(private profileDataService: ProfileDataService) {}
+  constructor(
+    private profileDataService: ProfileDataService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.profileDataService.getServices().subscribe(data => {
       this.services = data;
+      this.cdr.markForCheck();
     });
   }
 
