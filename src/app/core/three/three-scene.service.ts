@@ -27,32 +27,39 @@ export class ThreeSceneService implements OnDestroy {
   private targetCameraRotation = new THREE.Euler(0, 0, 0);
   private isMobile: boolean = false;
   private isTabActive: boolean = true;
+  private visibilityChangeHandler: () => void;
 
   constructor(private scrollService: ScrollService) {
     this.isMobile = this.detectMobile();
+    this.visibilityChangeHandler = this.handleVisibilityChange.bind(this);
     this.setupVisibilityListener();
+  }
+
+  /**
+   * Handle visibility change event
+   */
+  private handleVisibilityChange(): void {
+    this.isTabActive = !document.hidden;
+    
+    if (this.isTabActive) {
+      // Resume animation when tab becomes active
+      if (!this.animationFrameId) {
+        this.animate();
+      }
+    } else {
+      // Pause animation when tab becomes inactive
+      if (this.animationFrameId !== null) {
+        cancelAnimationFrame(this.animationFrameId);
+        this.animationFrameId = null;
+      }
+    }
   }
 
   /**
    * Setup visibility change listener to pause animation when tab is inactive
    */
   private setupVisibilityListener(): void {
-    document.addEventListener('visibilitychange', () => {
-      this.isTabActive = !document.hidden;
-      
-      if (this.isTabActive) {
-        // Resume animation when tab becomes active
-        if (!this.animationFrameId) {
-          this.animate();
-        }
-      } else {
-        // Pause animation when tab becomes inactive
-        if (this.animationFrameId !== null) {
-          cancelAnimationFrame(this.animationFrameId);
-          this.animationFrameId = null;
-        }
-      }
-    });
+    document.addEventListener('visibilitychange', this.visibilityChangeHandler);
   }
 
   /**
@@ -421,6 +428,9 @@ export class ThreeSceneService implements OnDestroy {
    * Cleanup on component destroy
    */
   dispose(): void {
+    // Remove visibility change listener
+    document.removeEventListener('visibilitychange', this.visibilityChangeHandler);
+
     // Unsubscribe from scroll events
     if (this.scrollSubscription) {
       this.scrollSubscription.unsubscribe();
