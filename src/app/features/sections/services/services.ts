@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Service } from '../../../core/models';
+import { Subject, takeUntil } from 'rxjs';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,17 +15,24 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './services.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Services implements OnInit, AfterViewInit {
+export class Services implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('serviceCard') serviceCards!: QueryList<ElementRef>;
   
   services: Service[] = [];
+  private destroy$ = new Subject<void>();
 
-  constructor(private profileDataService: ProfileDataService) {}
+  constructor(
+    private profileDataService: ProfileDataService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.profileDataService.getServices().subscribe(data => {
-      this.services = data;
-    });
+    this.profileDataService.getServices()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.services = data;
+        this.cdr.markForCheck();
+      });
   }
 
   ngAfterViewInit(): void {
@@ -60,5 +68,10 @@ export class Services implements OnInit, AfterViewInit {
         ease: 'power3.out'
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

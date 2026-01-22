@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Education } from '../../../core/models';
 import { DateUtils } from '../../../shared/utils/date.utils';
+import { Subject, takeUntil } from 'rxjs';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -15,17 +16,24 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './about.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class About implements OnInit, AfterViewInit {
+export class About implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('educationCard') educationCards!: QueryList<ElementRef>;
   
   education: Education[] = [];
+  private destroy$ = new Subject<void>();
 
-  constructor(private profileDataService: ProfileDataService) {}
+  constructor(
+    private profileDataService: ProfileDataService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.profileDataService.getEducation().subscribe(data => {
-      this.education = data;
-    });
+    this.profileDataService.getEducation()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.education = data;
+        this.cdr.markForCheck();
+      });
   }
 
   ngAfterViewInit(): void {
@@ -77,5 +85,10 @@ export class About implements OnInit, AfterViewInit {
         ease: 'power3.out'
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
