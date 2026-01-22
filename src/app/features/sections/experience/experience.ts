@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChildren, QueryList, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileDataService } from '../../../core/services/profile-data.service';
 import { Experience as ExperienceModel } from '../../../core/models';
 import { DateUtils } from '../../../shared/utils/date.utils';
+import { Subject, takeUntil } from 'rxjs';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -15,10 +16,11 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './experience.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Experience implements OnInit, AfterViewInit {
+export class Experience implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('experienceCard') experienceCards!: QueryList<ElementRef>;
   
   experiences: ExperienceModel[] = [];
+  private destroy$ = new Subject<void>();
 
   constructor(
     private profileDataService: ProfileDataService,
@@ -26,10 +28,12 @@ export class Experience implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.profileDataService.getExperience().subscribe(data => {
-      this.experiences = data;
-      this.cdr.markForCheck();
-    });
+    this.profileDataService.getExperience()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.experiences = data;
+        this.cdr.markForCheck();
+      });
   }
 
   ngAfterViewInit(): void {
@@ -80,5 +84,10 @@ export class Experience implements OnInit, AfterViewInit {
         });
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
