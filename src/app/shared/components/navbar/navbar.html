@@ -3,13 +3,20 @@
     <div class="navbar-brand">
       <a href="/">Salim Taha Yacine</a>
     </div>
-    <div class="navbar-menu">
+
+    <button class="menu-toggle" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navbar-menu" [class.open]="menuOpen">
       <a 
         *ngFor="let item of navItems"
         #navLink
         [href]="'#' + item.id"
         [class.active]="isActive(item.id)"
-        (click)="scrollToSection(item.id); $event.preventDefault()">
+        (click)="scrollToSection(item.id); $event.preventDefault(); closeMenu()">
         {{ item.label }}
       </a>
     </div>
