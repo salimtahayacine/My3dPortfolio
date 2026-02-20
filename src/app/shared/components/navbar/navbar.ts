@@ -14,6 +14,7 @@ export class Navbar implements OnInit, AfterViewInit {
   
   activeSection: string = 'hero';
   isScrolled: boolean = false;
+  menuOpen: boolean = false;
   
   navItems = [
     { id: 'about', label: 'About' },
@@ -43,6 +44,14 @@ export class Navbar implements OnInit, AfterViewInit {
 
   scrollToSection(sectionId: string): void {
     this.scrollService.scrollToSection(sectionId);
+  }
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
   }
 
   isActive(sectionId: string): boolean {

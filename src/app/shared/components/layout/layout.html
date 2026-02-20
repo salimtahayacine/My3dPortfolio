@@ -4,4 +4,10 @@
     <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>
+
+  @if (showBackToTop) {
+    <button class="back-to-top" (click)="scrollToTop()" aria-label="Back to top">
+      ↑
+    </button>
+  }
 </div>

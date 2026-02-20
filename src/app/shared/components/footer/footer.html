@@ -1,5 +1,32 @@
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2024 Portfolio. All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="brand-name" (click)="scrollToSection('hero', $event)">Salim Taha Yacine</a>
+        <p class="brand-tagline">Full Stack Developer crafting modern web &amp; mobile experiences.</p>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul>
+          @for (link of navLinks; track link.id) {
+            <li><a [href]="'#' + link.id" (click)="scrollToSection(link.id, $event)">{{ link.label }}</a></li>
+          }
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4 class="footer-heading">Connect</h4>
+        <div class="social-icons">
+          @for (link of socialLinks; track link.label) {
+            <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="social-icon" [attr.aria-label]="link.label">{{ link.label }}</a>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} Salim Taha Yacine. All rights reserved.</p>
+    </div>
   </div>
 </footer>
