@@ -469,3 +469,17 @@
   0% { left: -60%; }
   50%, 100% { left: 120%; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section {
+    .hero-image-container .hero-profile-image,
+    .hero-cta a.btn-primary::after,
+    .scroll-indicator .scroll-arrow {
+      animation: none;
+    }
+
+    &::before {
+      animation: none;
+    }
+  }
+}
